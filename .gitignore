@@ -30,3 +30,25 @@
 *.exe
 *.out
 *.app
+
+# IDE
+*.idea
+*.vscode
+*.user
+*.vs
+.vs/
+.cache
+*.pdb
+
+# build
+.out
+.build
+*-build
+*-build-*
+out/
+build*/
+cmake-*/
+*.bin
+Debug/
+x64
+CMakeUserPresets.json

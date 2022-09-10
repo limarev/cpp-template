@@ -1,0 +1,35 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 23,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "CI-base",
+      "displayName": "${hostSystemName} ${generator} configuration",
+      "description": "This is CI ${generator} preset for ${hostSystemName} build agent",
+      "binaryDir": "${sourceDir}/${presetName}-build",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      },
+      "architecture": {
+        "strategy": "external",
+        "value": "x64"
+      },
+      "vendor": {
+        "jetbrains.com/clion": {
+          "toolchain": "Default"
+        }
+      },
+      "environment": {
+
+      }
+    }
+  ],
+  "buildPresets": [
+
+  ]
+}

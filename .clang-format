@@ -1,0 +1,9 @@
+BasedOnStyle: LLVM
+---
+Language: Cpp
+ColumnLimit: 120
+QualifierAlignment: Custom
+QualifierOrder: [ 'inline', 'static', 'const', 'type' ]
+---
+Language: Json
+IndentWidth: 2
