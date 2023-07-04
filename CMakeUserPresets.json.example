@@ -1,0 +1,64 @@
+{
+  "version": 4,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 22,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "base",
+      "displayName": "${hostSystemName} ${generator} configuration",
+      "description": "This is CI ${generator} preset for ${hostSystemName} build agent",
+      "binaryDir": "${presetName}-build",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_VERBOSE_MAKEFILE": true,
+        "CMAKE_BUILD_TYPE": "Debug"
+      },
+      "environment": {
+        "CLANG_PATH": "/usr/lib/llvm-16"
+      },
+      "toolchainFile": "${sourceDir}/toolchain/ubuntu-arm64-clang.cmake",
+      "vendor": {
+        "jetbrains.com/clion": {
+          "toolchain": "Docker"
+        }
+      },
+      "debug": {
+        "output": false,
+        "find": false
+      }
+    },
+    {
+      "name": "release",
+      "inherits": "base",
+      "hidden": false,
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "debug",
+      "inherits": "base",
+      "hidden": false,
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "build-release",
+      "configurePreset": "release",
+      "verbose": false,
+      "hidden": false
+    },
+    {
+      "name": "build-debug",
+      "configurePreset": "debug",
+      "verbose": false,
+      "hidden": false
+    }
+  ]
+}
