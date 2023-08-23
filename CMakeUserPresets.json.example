@@ -1,64 +1,54 @@
 {
-  "version": 4,
+  "version": 6,
   "cmakeMinimumRequired": {
     "major": 3,
-    "minor": 22,
+    "minor": 23,
     "patch": 0
   },
   "configurePresets": [
     {
-      "name": "base",
-      "displayName": "${hostSystemName} ${generator} configuration",
-      "description": "This is CI ${generator} preset for ${hostSystemName} build agent",
-      "binaryDir": "${presetName}-build",
-      "hidden": true,
-      "cacheVariables": {
-        "CMAKE_VERBOSE_MAKEFILE": true,
-        "CMAKE_BUILD_TYPE": "Debug"
-      },
+      "name": "ubuntu",
+      "inherits": ["linux"],
       "environment": {
-        "CLANG_PATH": "/usr/lib/llvm-16"
+        "CLANG_PATH": "/usr/lib/llvm-17"
       },
-      "toolchainFile": "${sourceDir}/toolchain/ubuntu-arm64-clang.cmake",
       "vendor": {
         "jetbrains.com/clion": {
-          "toolchain": "Docker"
+          "toolchain": "Ubuntu"
         }
       },
-      "debug": {
-        "output": false,
-        "find": false
-      }
+      "hidden": true
     },
     {
-      "name": "release",
-      "inherits": "base",
-      "hidden": false,
-      "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Release"
-      }
+      "name": "ubuntu-ninja-clang-debug",
+      "inherits": ["default", "ubuntu", "ninja", "clang-linux-amd64", "debug"]
     },
     {
-      "name": "debug",
-      "inherits": "base",
-      "hidden": false,
-      "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Debug"
-      }
+      "name": "ubuntu-ninja-clang-release",
+      "inherits": ["default", "ubuntu", "ninja", "clang-linux-amd64", "release"]
     }
   ],
   "buildPresets": [
     {
-      "name": "build-release",
-      "configurePreset": "release",
-      "verbose": false,
-      "hidden": false
+      "name": "ubuntu-ninja-clang-debug",
+      "configurePreset": "ubuntu-ninja-clang-debug"
     },
     {
-      "name": "build-debug",
-      "configurePreset": "debug",
-      "verbose": false,
-      "hidden": false
+      "name": "ubuntu-ninja-clang-release",
+      "configurePreset": "ubuntu-ninja-clang-release"
+    }
+
+  ],
+  "packagePresets": [
+    {
+      "name": "default-deb",
+      "inherits": ["deb", "default"],
+      "configurePreset": "ubuntu-ninja-clang-release"
+    },
+    {
+      "name": "default-rpm",
+      "inherits": ["rpm", "default"],
+      "configurePreset": "ubuntu-ninja-clang-release"
     }
   ]
 }
