@@ -66,6 +66,12 @@
       "hidden": true
     },
     {
+      "name": "clang-darwin-arm64",
+      "inherits": ["darwin"],
+      "toolchainFile": "toolchains/arm64/darwin-arm64-clang.cmake",
+      "hidden": true
+    },
+    {
       "name": "msvc-amd64",
       "inherits": ["windows"],
       "toolchainFile": "toolchains/amd64/windows-amd64-msvc.cmake",
@@ -127,6 +133,11 @@
         "CPACK_PACKAGING_INSTALL_PREFIX": "/opt",
         "CPACK_RPM_PACKAGE_RELOCATABLE": "ON"
       },
+      "hidden": true
+    },
+    {
+      "name": "bundle",
+      "generators": ["BUNDLE"],
       "hidden": true
     }
   ]
