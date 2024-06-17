@@ -40,7 +40,7 @@
 FROM ubuntu:latest as cmake
 
 ARG CMAKE_INSTALL_DIR=/cmake
-ARG CMAKE_VERSION=v3.26.5
+ARG CMAKE_VERSION=v3.29.5
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG TZ=Europe/Moscow
