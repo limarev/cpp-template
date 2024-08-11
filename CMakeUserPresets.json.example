@@ -10,11 +10,11 @@
       "name": "ubuntu",
       "inherits": ["linux"],
       "cacheVariables": {
-        "CLANG_PATH": "/usr/lib/llvm-17"
+        "GCC_PATH": "/usr"
       },
       "vendor": {
         "jetbrains.com/clion": {
-          "toolchain": "Ubuntu"
+          "toolchain": "home"
         }
       },
       "hidden": true
@@ -23,21 +23,30 @@
       "name": "macos-m1",
       "inherits": ["darwin"],
       "cacheVariables": {
-        "CLANG_PATH": "/opt/homebrew/Cellar/llvm/18.1.4"
+        "CLANG_PATH": "/opt/homebrew/Cellar/llvm/18.1.8"
+      },
+      "environment": {
+        "MallocNanoZone": "0"
       },
       "hidden": true
     },
     {
-      "name": "ubuntu-ninja-clang-debug",
-      "inherits": ["default", "ubuntu", "ninja", "clang-linux-amd64", "debug"]
+      "name": "ubuntu-ninja-gcc-debug",
+      "inherits": ["default", "ubuntu", "ninja", "linux-arm64-gcc", "debug"],
+      "cacheVariables": {
+        "CMAKE_VERBOSE_MAKEFILE": "ON"
+      }
     },
     {
-      "name": "ubuntu-ninja-clang-release",
-      "inherits": ["default", "ubuntu", "ninja", "clang-linux-amd64", "release"]
+      "name": "ubuntu-ninja-gcc-release",
+      "inherits": ["default", "ubuntu", "ninja", "linux-arm64-gcc", "release"]
     },
     {
       "name": "macos-m1-ninja-clang-debug",
-      "inherits": ["default", "macos-m1", "ninja", "clang-darwin-arm64", "debug"]
+      "inherits": ["default", "macos-m1", "ninja", "clang-darwin-arm64", "debug"],
+      "cacheVariables": {
+        "CMAKE_VERBOSE_MAKEFILE": "ON"
+      }
     },
     {
       "name": "macos-m1-ninja-clang-release",
@@ -46,12 +55,12 @@
   ],
   "buildPresets": [
     {
-      "name": "ubuntu-ninja-clang-debug",
-      "configurePreset": "ubuntu-ninja-clang-debug"
+      "name": "ubuntu-ninja-gcc-debug",
+      "configurePreset": "ubuntu-ninja-gcc-debug"
     },
     {
-      "name": "ubuntu-ninja-clang-release",
-      "configurePreset": "ubuntu-ninja-clang-release"
+      "name": "ubuntu-ninja-gcc-release",
+      "configurePreset": "ubuntu-ninja-gcc-release"
     },
     {
       "name": "macos-m1-ninja-clang-debug",
@@ -66,12 +75,12 @@
     {
       "name": "default-deb",
       "inherits": ["deb", "default"],
-      "configurePreset": "ubuntu-ninja-clang-release"
+      "configurePreset": "ubuntu-ninja-gcc-release"
     },
     {
       "name": "default-rpm",
       "inherits": ["rpm", "default"],
-      "configurePreset": "ubuntu-ninja-clang-release"
+      "configurePreset": "ubuntu-ninja-gcc-release"
     },
     {
       "name": "default-bundle",
